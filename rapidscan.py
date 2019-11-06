@@ -23,7 +23,7 @@ import random
 import string
 import threading
 import re
-from urlparse import urlsplit
+#from urlparse4 import urlsplit
 
 
 
@@ -65,23 +65,24 @@ def check_internet():
 
 # Initializing the color module class
 class bcolors:
-    HEADER = '\033[95m'
-    OKBLUE = '\033[94m'
-    OKGREEN = '\033[92m'
-    WARNING = '\033[93m'
-    BADFAIL = '\033[91m'
-    ENDC = '\033[0m'
-    BOLD = '\033[1m'
-    UNDERLINE = '\033[4m'
+    HEADER = ''
+    OKBLUE = ''
+    OKGREEN = ''
+    WARNING = ''
+    BADFAIL = ''
+    ENDBOLD = '</b>'
+    BOLD = '<b>'
+    ENDC = ''
+    UNDERLINE = ''
 
-    BG_ERR_TXT 	= '\033[41m' # For critical errors and crashes
-    BG_HEAD_TXT = '\033[100m'
-    BG_ENDL_TXT = '\033[46m'
-    BG_CRIT_TXT = '\033[45m'
-    BG_HIGH_TXT = '\033[41m'
-    BG_MED_TXT  = '\033[43m'
-    BG_LOW_TXT  = '\033[44m'
-    BG_INFO_TXT = '\033[42m'
+    BG_ERR_TXT 	= '' # For critical errors and crashes
+    BG_HEAD_TXT = ''
+    BG_ENDL_TXT = ''
+    BG_CRIT_TXT = ''
+    BG_HIGH_TXT = ''
+    BG_MED_TXT  = ''
+    BG_LOW_TXT  = ''
+    BG_INFO_TXT = ''
 
 
 # Classifies the Vulnerability's Severity
@@ -100,17 +101,17 @@ def vul_info(val):
 	return result
 
 # Legends
-proc_high = bcolors.BADFAIL + "●" + bcolors.ENDC
-proc_med  = bcolors.WARNING + "●" + bcolors.ENDC
-proc_low  = bcolors.OKGREEN + "●" + bcolors.ENDC
+proc_high = bcolors.BADFAIL + "" + bcolors.ENDC
+proc_med  = bcolors.WARNING + "" + bcolors.ENDC
+proc_low  = bcolors.OKGREEN + "" + bcolors.ENDC
 
 # Links the vulnerability with threat level and remediation database
 def vul_remed_info(v1,v2,v3):
-	print bcolors.BOLD+"Vulnerability Threat Level"+bcolors.ENDC
+	print bcolors.BOLD+"Vulnerability Threat Level"+bcolors.ENDBOLD+bcolors.ENDC
 	print "\t"+vul_info(v2)+" "+bcolors.WARNING+str(tool_resp[v1][0])+bcolors.ENDC
-	print bcolors.BOLD+"Vulnerability Definition"+bcolors.ENDC
+	print bcolors.BOLD+"Vulnerability Definition"+bcolors.ENDBOLD+bcolors.ENDC
 	print "\t"+bcolors.BADFAIL+str(tools_fix[v3-1][1])+bcolors.ENDC
-	print bcolors.BOLD+"Vulnerability Remediation"+bcolors.ENDC
+	print bcolors.BOLD+"Vulnerability Remediation"+bcolors.ENDBOLD+bcolors.ENDC
 	print "\t"+bcolors.OKGREEN+str(tools_fix[v3-1][2])+bcolors.ENDC
 
 
@@ -147,13 +148,7 @@ def clear():
 # RapidScan Logo
 def logo():
 	print bcolors.WARNING
-        print("""\
-                                  __         __
-                                 /__)_  """+bcolors.BADFAIL+" ●"+bcolors.WARNING+"""_/(  _ _
-                                / ( (//)/(/__)( (//)
-                                     /
-                     """+bcolors.ENDC+"""(The Multi-Tool Web Vulnerability Scanner)
-                            """)
+        print "AIC Web Scanner"
         print bcolors.ENDC
 
 # Initiliazing the idle loader/spinner class
@@ -181,7 +176,7 @@ class Spinner:
                 sys.stdout.flush()
         except (KeyboardInterrupt, SystemExit):
             #clear()
-            print "\n\t"+ bcolors.BG_ERR_TXT+"RapidScan received a series of Ctrl+C hits. Quitting..." +bcolors.ENDC
+            print "\n\t"+ bcolors.BG_ERR_TXT+".RapidScan received a series of Ctrl+C hits. Quitting..." +bcolors.ENDC
             sys.exit(1)
 
     def start(self):
@@ -194,7 +189,7 @@ class Spinner:
             time.sleep(self.delay)
         except (KeyboardInterrupt, SystemExit):
             #clear()
-            print "\n\t"+ bcolors.BG_ERR_TXT+"RapidScan received a series of Ctrl+C hits. Quitting..." +bcolors.ENDC
+            print "\n\t"+ bcolors.BG_ERR_TXT+".RapidScan received a series of Ctrl+C hits. Quitting..." +bcolors.ENDC
             sys.exit(1)
 # End ofloader/spinner class
 
@@ -710,12 +705,12 @@ else:
 
     if target == '--update' or target == '-u' or target == '--u':
     	logo()
-        print "RapidScan is updating....Please wait.\n"
+        print ".RapidScan is updating....Please wait.\n"
         spinner.start()
         # Checking internet connectivity first...
         rs_internet_availability = check_internet()
         if rs_internet_availability == 0:
-            print "\t"+ bcolors.BG_ERR_TXT + "There seems to be some problem connecting to the internet. Please try again or later." +bcolors.ENDC
+            print "\t"+ bcolors.BG_ERR_TXT + ".There seems to be some problem connecting to the internet. Please try again or later." +bcolors.ENDC
             spinner.stop()
             sys.exit(1)
         cmd = 'sha1sum rapidscan.py | grep .... | cut -c 1-40'
@@ -726,10 +721,10 @@ else:
         newversion_hash = newversion_hash.strip()
         if oldversion_hash == newversion_hash :
             clear()
-            print "\t"+ bcolors.OKBLUE +"You already have the latest version of RapidScan." + bcolors.ENDC
+            print "\t"+ bcolors.OKBLUE +".You already have the latest version of RapidScan." + bcolors.ENDC
         else:
             clear()
-            print "\t"+ bcolors.OKGREEN +"RapidScan successfully updated to the latest version." +bcolors.ENDC
+            print "\t"+ bcolors.OKGREEN +".RapidScan successfully updated to the latest version." +bcolors.ENDC
         spinner.stop()
         sys.exit(1)
 
@@ -744,7 +739,7 @@ else:
         os.system('clear')
         os.system('setterm -cursor off')
         logo()
-        print bcolors.BG_HEAD_TXT+"[ Checking Available Security Scanning Tools Phase... Initiated. ]"+bcolors.ENDC
+        print bcolors.BG_HEAD_TXT+".[ Checking Available Security Scanning Tools Phase... Initiated. ]"+bcolors.ENDC
         unavail_tools = 0
         unavail_tools_names = list()
         while (rs_avail_tools < len(tools_precheck)):
@@ -754,10 +749,10 @@ else:
 				output, err = p.communicate()
 				val = output + err
 			except:
-				print "\t"+bcolors.BG_ERR_TXT+"RapidScan was terminated abruptly..."+bcolors.ENDC
+				print "\t"+bcolors.BG_ERR_TXT+".RapidScan was terminated abruptly..."+bcolors.ENDC
 				sys.exit(1)
 			if "not found" in val:
-				print "\t"+bcolors.OKBLUE+tools_precheck[rs_avail_tools][arg1]+bcolors.ENDC+bcolors.BADFAIL+"...unavailable."+bcolors.ENDC
+		#		print "\t"+bcolors.OKBLUE+tools_precheck[rs_avail_tools][arg1]+bcolors.ENDC+bcolors.BADFAIL+"...unavailable."+bcolors.ENDC
 				for scanner_index, scanner_val in enumerate(tool_names):
 					if scanner_val[2] == tools_precheck[rs_avail_tools][arg1]:
 						scanner_val[3] = 0 # disabling scanner as it's not available.
@@ -765,19 +760,21 @@ else:
 						unavail_tools = unavail_tools + 1
 			else:
 				print "\t"+bcolors.OKBLUE+tools_precheck[rs_avail_tools][arg1]+bcolors.ENDC+bcolors.OKGREEN+"...available."+bcolors.ENDC
-			rs_avail_tools = rs_avail_tools + 1
-			clear()
+        rs_avail_tools = rs_avail_tools + 1
+	clear()
         unavail_tools_names = list(set(unavail_tools_names))
         if unavail_tools == 0:
-        	print "\t"+bcolors.OKGREEN+"All Scanning Tools are available. All vulnerability checks will be performed by RapidScan."+bcolors.ENDC
+        	print "\t"+bcolors.OKGREEN+".All Scanning Tools are available. All vulnerability checks will be performed by RapidScan."+bcolors.ENDC
         else:
         	print "\t"+bcolors.WARNING+"Some of these tools "+bcolors.BADFAIL+str(unavail_tools_names)+bcolors.ENDC+bcolors.WARNING+" are unavailable. RapidScan can still perform tests by excluding these tools from the tests. Please install these tools to fully utilize the functionality of RapidScan."+bcolors.ENDC
-        print bcolors.BG_ENDL_TXT+"[ Checking Available Security Scanning Tools Phase... Completed. ]"+bcolors.ENDC
+        print bcolors.BG_ENDL_TXT+".[ Checking Available Security Scanning Tools Phase... Completed. ]"+bcolors.ENDC
         print "\n"
-        print bcolors.BG_HEAD_TXT+"[ Preliminary Scan Phase Initiated... Loaded "+str(tool_checks)+" vulnerability checks.  ]"+bcolors.ENDC
+        print bcolors.BG_HEAD_TXT+".[ Preliminary Scan Phase Initiated... Loaded "+str(tool_checks)+" vulnerability checks.  ]"+bcolors.ENDC
         #while (tool < 1):
+
+
         while(tool < len(tool_names)):
-            print "["+tool_status[tool][arg3]+tool_status[tool][arg4]+"] Deploying "+str(tool+1)+"/"+str(tool_checks)+" | "+bcolors.OKBLUE+tool_names[tool][arg2]+bcolors.ENDC,
+            print ".["+tool_status[tool][arg3]+tool_status[tool][arg4]+"] Deploying "+str(tool+1)+"/"+str(tool_checks)+" | "+bcolors.OKBLUE+tool_names[tool][arg2]+bcolors.ENDC,
             if tool_names[tool][arg4] == 0:
             	print bcolors.WARNING+"...Scanning Tool Unavailable. Auto-Skipping Test..."+bcolors.ENDC
 		rs_skipped_checks = rs_skipped_checks + 1
@@ -823,16 +820,16 @@ else:
                     rs_total_elapsed = rs_total_elapsed + elapsed
                     print bcolors.OKBLUE+"\b\b\b\b...Interrupted in "+display_time(int(elapsed))+bcolors.ENDC+"\n"
                     clear()
-                    print "\t"+bcolors.WARNING + "Test Skipped. Performing Next. Press Ctrl+Z to Quit RapidScan." + bcolors.ENDC
+                    print "\t"+bcolors.WARNING + ".Test Skipped. Performing Next. Press Ctrl+Z to Quit RapidScan." + bcolors.ENDC
                     rs_skipped_checks = rs_skipped_checks + 1
 
             tool=tool+1
 
-        print bcolors.BG_ENDL_TXT+"[ Preliminary Scan Phase Completed. ]"+bcolors.ENDC
+        print bcolors.BG_ENDL_TXT+".[ Preliminary Scan Phase Completed. ]"+bcolors.ENDC
         print "\n"
 
         #################### Report & Documentation Phase ###########################
-        print bcolors.BG_HEAD_TXT+"[ Report Generation Phase Initiated. ]"+bcolors.ENDC
+        print bcolors.BG_HEAD_TXT+".[ Report Generation Phase Initiated. ]"+bcolors.ENDC
         if len(rs_vul_list)==0:
         	print "\t"+bcolors.OKGREEN+"No Vulnerabilities Detected."+bcolors.ENDC
         else:
@@ -849,7 +846,7 @@ else:
 	        		temp_report.close()
 	       			rs_vul = rs_vul + 1
 
-	       		print "\tComplete Vulnerability Report for "+bcolors.OKBLUE+target+bcolors.ENDC+" named "+bcolors.OKGREEN+"`RS-Vulnerability-Report`"+bcolors.ENDC+" is available under the same directory RapidScan resides."
+	       		print "\tComplete Vulnerability Report for "+bcolors.OKBLUE+target+bcolors.ENDC+" named "+bcolors.OKGREEN+"`AIC-Vulnerability-Report`"+bcolors.ENDC+" is available under the same directory RapidScan resides."
 
         	report.close()
         # Writing all scan files output into RS-Debug-ScanLog for debugging purposes.
@@ -867,13 +864,13 @@ else:
 	        		break
 	        report.close()
 
-        print "\tTotal Number of Vulnerability Checks        : "+bcolors.BOLD+bcolors.OKGREEN+str(len(tool_names))+bcolors.ENDC
-        print "\tTotal Number of Vulnerability Checks Skipped: "+bcolors.BOLD+bcolors.WARNING+str(rs_skipped_checks)+bcolors.ENDC
-        print "\tTotal Number of Vulnerabilities Detected    : "+bcolors.BOLD+bcolors.BADFAIL+str(len(rs_vul_list))+bcolors.ENDC
-        print "\tTotal Time Elapsed for the Scan             : "+bcolors.BOLD+bcolors.OKBLUE+display_time(int(rs_total_elapsed))+bcolors.ENDC
+        print "\tTotal Number of Vulnerability Checks        : "+bcolors.BOLD+bcolors.OKGREEN+str(len(tool_names))+bcolors.ENDBOLD+bcolors.ENDC
+        print "\tTotal Number of Vulnerability Checks Skipped: "+bcolors.BOLD+bcolors.WARNING+str(rs_skipped_checks)+bcolors.ENDBOLD+bcolors.ENDC
+        print "\tTotal Number of Vulnerabilities Detected    : "+bcolors.BOLD+bcolors.BADFAIL+str(len(rs_vul_list))+bcolors.ENDBOLD+bcolors.ENDC
+        print "\tTotal Time Elapsed for the Scan             : "+bcolors.BOLD+bcolors.OKBLUE+display_time(int(rs_total_elapsed))+bcolors.ENDBOLD+bcolors.ENDC
         print "\n"
-        print "\tFor Debugging Purposes, You can view the complete output generated by all the tools named "+bcolors.OKBLUE+"`RS-Debug-ScanLog`"+bcolors.ENDC+" under the same directory."
-        print bcolors.BG_ENDL_TXT+"[ Report Generation Phase Completed. ]"+bcolors.ENDC
+        print "\tFor Debugging Purposes, You can view the complete output generated by all the tools named "+bcolors.OKBLUE+"`AIC-Debug-ScanLog`"+bcolors.ENDC+" under the same directory."
+        print bcolors.BG_ENDL_TXT+".[ Report Generation Phase Completed. ]"+bcolors.ENDC
 
         os.system('setterm -cursor on')
         os.system('rm te* > /dev/null 2>&1') # Clearing previous scan files

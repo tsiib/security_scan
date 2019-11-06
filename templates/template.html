@@ -1,0 +1,27 @@
+ <!DOCTYPE html>
+<html lang="en" dir="ltr">
+ <head>
+   <meta charset="utf-8">
+   <title>Home</title>
+   <link rel="stylesheet" href="static/css/template.css">
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.min.js"></script>
+ </head>
+ <body>
+    <header>
+      <div class="container">
+        <h1 class="logo">Security Web App</h1>
+        <strong><nav>
+          <ul class="menu">
+            <li><a href="{{ 'was' }}">Web Application Scan</a></li>
+            <li><a href="{{ 'waf' }}">Web Application Firewall</a></li>
+          </ul>
+        </nav></strong>
+      </div>
+    </header>
+    
+    {% block content %}
+    {% endblock %}
+    
+ </body>
+</html>

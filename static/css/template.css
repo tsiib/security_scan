@@ -1,0 +1,38 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans);
+
+body{
+  background: #ffffff;
+  font-family: 'Montserrat', sans-serif;
+
+}
+.logo {
+  background-color: #0D122B;
+  padding: 10px;
+  color: white;
+}
+
+.search {
+  width: 100px;
+  height: 30px;
+  border: 10px;
+  border-color:  #0D122B;
+  float: center;
+  display: flex;
+}
+
+.searchTerm{
+
+}
+
+.searchButton {
+  width: 20px
+  height: 30px;
+  background: #0D122C;
+  text-align: center;
+  color: #fff;
+  border-radius: 0 5px 5px 0;
+  border-color:  #0D122B;
+  cursor: pointer;
+  font-size: 20px;
+}
+
